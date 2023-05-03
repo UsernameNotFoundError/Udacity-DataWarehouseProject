@@ -1,6 +1,6 @@
 import configparser
 import psycopg2
-from .sql_queries import copy_table_queries, insert_table_queries
+from sql_queries import copy_table_queries, insert_table_queries
 
 class Etl():
     def __init__(self) -> None:
@@ -32,16 +32,14 @@ class Etl():
             print("Error executing SQL command:", e)
             
 
-    def load_staging_tables(self) -> None:
-        for query in copy_table_queries:
-            self.execute_sql_commands(query)
-
-
     def insert_tables(self) -> None:
-        for query in insert_table_queries:
+        for query in insert_table_queries:  # imported object
             self.execute_sql_commands(query)
 
-
+            
+    def load_staging_tables(self) -> None:
+        for query in copy_table_queries:  # imported object
+            self.execute_sql_commands(query)
 
 
 if __name__ == "__main__":
