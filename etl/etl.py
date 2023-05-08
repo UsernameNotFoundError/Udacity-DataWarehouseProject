@@ -1,6 +1,6 @@
 import configparser
 import psycopg2
-from sql_queries import copy_table_queries, insert_table_queries
+from etl.sql_queries import copy_table_queries, insert_table_queries
 
 class Etl():
     def __init__(self) -> None:
@@ -12,8 +12,13 @@ class Etl():
     def connect_to_database(self) -> None:
         config = configparser.ConfigParser()
         config.read('dwh.cfg')
+        try:
+            self.conn = psycopg2.connect("host={} dbname={} user={} password={} port={}".format(*config['CLUSTER'].values()))
+            self.conn.autocommit = True
+            self.cur = self.conn.cursor()
+        except (Exception, psycopg2.Error) as e:
+            print("Error connecting to database:", e)
 
-        self.conn = psycopg2.connect("host={} dbname={} user={} password={} port={}".format(*config['CLUSTER'].values()))
         """# Connect to the Redshift database
         self.conn = psycopg2.connect(
         host="<your-redshift-hostname>",
@@ -22,8 +27,7 @@ class Etl():
         password="<your-redshift-password>",
         port="<your-redshift-port>"
         )"""
-        self.conn.autocommit = True
-        self.cur = self.conn.cursor()
+
 
     def execute_sql_commands(self, my_command:str) -> None:
         try:
