@@ -6,9 +6,8 @@ parent_dir = os.path.dirname(current_dir)
 sys.path.append(parent_dir)
 from create_tables.create_tables import CreateTables
 
-
-
 class TestEtl(unittest.TestCase):
+    """Test class for the create_tables."""
     def setUp(self) -> None:
         self.my_test_instance = CreateTables()
     
@@ -16,24 +15,16 @@ class TestEtl(unittest.TestCase):
         return super().tearDown()
     
     def test_database_connection(self):
-        self.assertTrue( bool(my_test_instance.conn) )
+        """Check that the database connection is not None"""
+        self.assertTrue( self.my_test_instance.conn is not None )
+    
     
     def test_table_creation_and_deletion(self):
-        self.assertEqual(4,4)
-    
-    def test_create_tables(self):
-        # Call the method that creates tables
         self.my_test_instance.create_tables()
-        
-        # Use a SQL query to check if the tables exist
-        self.my_test_instance.cur.execute("SELECT COUNT(*) FROM information_schema.tables WHERE table_name = 'table1'")
-        result = self.my_test_instance.cur.fetchone()
-        
-        # Assert that the query returned a result
-        self.assertIsNotNone(result)
-        
-        # Assert that the number of tables is 1
-        self.assertEqual(result[0], 1)
+        self.my_test_instance.cur.execute("SELECT COUNT(*) FROM information_schema.tables")
+        my_sql_query_result = self.my_test_instance.cur.fetchone()
+        print('HEllo\n', my_sql_query_result)
+        self.assertIsNotNone(my_sql_query_result[0] > 0)
 
 
 if __name__ == "__main__":

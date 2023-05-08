@@ -1,14 +1,23 @@
 import configparser
 import psycopg2
+import sys
+import os
+# To import the variable
+current_dir = os.path.dirname(os.path.realpath(__file__))
+print(current_dir)
+parent_dir = os.path.dirname(current_dir)
+sys.path.append(parent_dir)
 from create_tables.sql_queries import create_table_queries, drop_table_queries
 
 class CreateTables():
     conn = None
+    cur = None
     def __init__(self) -> None:
         self.connect_to_database()   
-        self.drop_tables()
-        self.create_tables()
-        if self.conn is not None: self.conn.close() 
+        if self.conn is not None:
+            self.drop_tables()
+            self.create_tables()
+            #self.conn.close() 
 
 
     def connect_to_database(self) -> None:
