@@ -8,21 +8,32 @@ sys.path.append(parent_dir)
 from etl.etl import Etl
 
 class TestEtl(unittest.TestCase):
-    '''
+    
     def setUp(self) -> None:
         self.my_test_instance = Etl()
     
+    
     def tearDown(self) -> None:
-        pass #return super().tearDown()
+        return super().tearDown()
+    
     
     def test_database_connection(self):
-        Etl.connect_to_database()
-    
-    def test_table_creation_and_deletion(self):
-        self.assertEqual(4,4)
-    '''
-    def test_empty(self):
-        self.assertEqual(4,4)
+        """Check that the database connection is not None"""
+        self.assertTrue( self.my_test_instance.conn is not None )
+        
+        
+    def test_data_load_staging_tables(self):
+        """Test is the Data insertion worked in staging tables"""
+        self.my_test_instance.cur.execute("SELECT COUNT(*) FROM staging_songs")
+        my_sql_query_result = self.my_test_instance.cur.fetchone()
+        self.assertTrue( my_sql_query_result[0] )
+        
+        
+    def test_data_inserted_into_database(self):
+        """Test is the Data insertion works in teh tables"""
+        self.my_test_instance.cur.execute("SELECT COUNT(*) FROM users")
+        my_sql_query_result = self.my_test_instance.cur.fetchone()
+        self.assertTrue( my_sql_query_result[0] )
         
     
 if __name__ == "__main__":

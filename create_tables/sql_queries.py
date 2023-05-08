@@ -10,7 +10,8 @@ time_table_drop = "DROP TABLE IF EXISTS time"
 
 # CREATE TABLES
 
-staging_events_table_create= ("""
+staging_events_table_create= (
+        """
         CREATE TABLE IF NOT EXISTS staging_events (
             artist VARCHAR(255),
             auth VARCHAR(50),
@@ -34,7 +35,8 @@ staging_events_table_create= ("""
         """
 )
 
-staging_songs_table_create = ("""
+staging_songs_table_create = (
+        """
         CREATE TABLE IF NOT EXISTS staging_songs (
             num_songs INT,
             artist_id VARCHAR(50),
@@ -50,7 +52,8 @@ staging_songs_table_create = ("""
         """
 )
 
-songplay_table_create = ("""
+songplay_table_create = (
+        """
         CREATE TABLE IF NOT EXISTS songplays (
             songplay_id INT IDENTITY(0,1) PRIMARY KEY,
             start_time TIMESTAMP NOT NULL,
@@ -65,7 +68,8 @@ songplay_table_create = ("""
         """
 )
 
-user_table_create = ("""
+user_table_create = (
+        """
         CREATE TABLE IF NOT EXISTS users (
             user_id INT PRIMARY KEY,
             first_name VARCHAR(50),
@@ -76,7 +80,8 @@ user_table_create = ("""
         """
 )
 
-song_table_create = ("""
+song_table_create = (
+        """
         CREATE TABLE IF NOT EXISTS songs (
             song_id VARCHAR(50) PRIMARY KEY,
             title VARCHAR(255),
@@ -87,7 +92,8 @@ song_table_create = ("""
         """
 )
 
-artist_table_create = ("""
+artist_table_create = (
+        """
         CREATE TABLE IF NOT EXISTS artists (
             artist_id VARCHAR(50) PRIMARY KEY,
             name VARCHAR(255),
@@ -98,16 +104,19 @@ artist_table_create = ("""
         """
 )
 
-time_table_create = ("""CREATE TABLE IF NOT EXISTS time (
-    start_time TIMESTAMP PRIMARY KEY,
-    hour INT,
-    day INT,
-    week INT,
-    month INT,
-    year INT,
-    weekday INT
-);
-""")
+time_table_create = (
+        """
+        CREATE TABLE IF NOT EXISTS time (
+            start_time TIMESTAMP PRIMARY KEY,
+            hour INT,
+            day INT,
+            week INT,
+            month INT,
+            year INT,
+            weekday INT
+        );
+        """
+)
                      
 # QUERY LISTS
 

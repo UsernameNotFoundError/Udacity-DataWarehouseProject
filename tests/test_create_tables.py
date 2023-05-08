@@ -24,7 +24,7 @@ class TestEtl(unittest.TestCase):
         self.my_test_instance.cur.execute("SELECT COUNT(*) FROM information_schema.tables")
         my_sql_query_result = self.my_test_instance.cur.fetchone()
         print('HEllo\n', my_sql_query_result)
-        self.assertIsNotNone(my_sql_query_result[0] > 0)
+        self.assertIsNotNone( my_sql_query_result[0] )
 
 
 if __name__ == "__main__":
