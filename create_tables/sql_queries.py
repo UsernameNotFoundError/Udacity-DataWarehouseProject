@@ -42,9 +42,9 @@ staging_songs_table_create = (
             artist_id VARCHAR(50),
             artist_latitude FLOAT,
             artist_longitude FLOAT,
-            artist_location VARCHAR(255),
+            artist_location VARCHAR(1000),
             artist_name VARCHAR(255),
-            song_id VARCHAR(50),
+            song_id VARCHAR(50) UNIQUE,
             title VARCHAR(255),
             duration FLOAT,
             year INT

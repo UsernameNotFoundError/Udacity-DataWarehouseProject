@@ -6,18 +6,24 @@ config = configparser.ConfigParser()
 config.read('dwh.cfg')
 
 # STAGING TABLES
-
 staging_events_copy = (
-        """
-        COPY staging_events FROM '{LOG_DATA}' CREDENTIALS 'aws_iam_role={IAM_ROLE}' FORMAT JSON '{LOG_JSONPATH}'
-        """
-).format(*config)
+    """
+    COPY staging_events FROM '{}' 
+    CREDENTIALS 'aws_iam_role={}' FORMAT JSON '{}'
+    compupdate off region 'us-west-2';
+    """
+).format(config.get('S3', 'LOG_DATA'), config.get('IAM_ROLE', 'ARN'), config.get('S3', 'LOG_JSONPATH'))
+
 
 staging_songs_copy = (
-        """
-        COPY staging_songs FROM '{SONG_DATA}' CREDENTIALS 'aws_iam_role={IAM_ROLE}'
-        """
-).format(*config)
+    """
+    COPY staging_songs FROM '{}' 
+    CREDENTIALS 'aws_iam_role={}'
+    FORMAT AS json 'auto'
+    TRUNCATECOLUMNS 
+    compupdate off region 'us-west-2';
+    """
+).format(config.get('S3', 'SONG_DATA'), config.get('IAM_ROLE', 'ARN')) # MAXERROR 100
 
 # FINAL TABLES
 
@@ -25,7 +31,7 @@ songplay_table_insert = (
         """
         INSERT INTO songplays (start_time, user_id, level, song_id, artist_id, session_id, location, user_agent)
         SELECT 
-            TO_TIMESTAMP(staging_events.ts/1000) AS start_time,
+        DATEADD(MILLISECONDS, staging_events.ts, 'epoch') AS start_time,
             staging_events.userId AS user_id,
             staging_events.level AS level,
             staging_songs.song_id AS song_id,
@@ -60,7 +66,7 @@ song_table_insert = (
             artist_id,
             year,
             duration
-        FROM staging_song
+        FROM staging_songs
         """
 )
 
@@ -89,7 +95,7 @@ time_table_insert = (
                 EXTRACT(year FROM start_time) AS year,
                 EXTRACT(dayofweek FROM start_time) AS weekday
         FROM (
-                SELECT TO_TIMESTAMP(ts/1000) AS start_time
+                SELECT DATEADD(MILLISECONDS, ts, 'epoch') AS start_time
                 FROM staging_events
         )
         """

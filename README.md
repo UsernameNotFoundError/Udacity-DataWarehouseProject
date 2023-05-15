@@ -22,3 +22,6 @@ As their data engineer, you are tasked with building an ETL pipeline that extrac
 ## Install requirements
 ```pip install -r requirements.txt```
 
+
+## Remarks:
+Make sure that the redshift clutser used is in the same region as your s3 buckets (in this case US-West-2 )
