@@ -24,4 +24,26 @@ As their data engineer, you are tasked with building an ETL pipeline that extrac
 
 
 ## Remarks:
-Make sure that the redshift clutser used is in the same region as your s3 buckets (in this case US-West-2 )
+Make sure to fill *dwh.cfg* with the corresponding parameters
+*[CLUSTER]
+  *HOST=<YOUR_AWS_REDSHIFT_ENDPOINT>
+  *DB_NAME=<YOUR_AWS_REDSHIFT_CLUSTER_DATABASE>
+  *DB_USER=<YOUR_AWS_DATABASE_USER>
+  *DB_PASSWORD=<YOUR_AWS_DATABASE_PASSWORD>
+  *DB_PORT=<YOUR_AWS_REDSHIFT_PORT>
+
+*[IAM_ROLE]
+  *ARN=<IAM_ROLE_ARN> 
+
+*[S3]
+  *LOG_DATA=s3://udacity-dend/log-data
+  *LOG_JSONPATH=s3://udacity-dend/log_json_path.json
+  *SONG_DATA=s3://udacity-dend/song-data/
+
+*[IAM_USER]
+  *KEY=<YOUR_AWS_KEY>
+  *SECRET=<YOUR_AWS_SECRET>
+
+## Run:
+1) ```python create_tables.py```
+2) ```python etl.py```
