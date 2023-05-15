@@ -26,22 +26,22 @@ As their data engineer, you are tasked with building an ETL pipeline that extrac
 ## Remarks:
 Make sure to fill *dwh.cfg* with the corresponding parameters:
 
-*[CLUSTER]
+ Markup : *[CLUSTER]
   *HOST=<YOUR_AWS_REDSHIFT_ENDPOINT>
   *DB_NAME=<YOUR_AWS_REDSHIFT_CLUSTER_DATABASE>
   *DB_USER=<YOUR_AWS_DATABASE_USER>
   *DB_PASSWORD=<YOUR_AWS_DATABASE_PASSWORD>
   *DB_PORT=<YOUR_AWS_REDSHIFT_PORT>
 
-*[IAM_ROLE]
+ Markup : *[IAM_ROLE]
   *ARN=<IAM_ROLE_ARN> 
 
-*[S3]
+ Markup : *[S3]
   *LOG_DATA=s3://udacity-dend/log-data
   *LOG_JSONPATH=s3://udacity-dend/log_json_path.json
   *SONG_DATA=s3://udacity-dend/song-data/
 
-*[IAM_USER]
+ Markup : *[IAM_USER]
   *KEY=<YOUR_AWS_KEY>
   *SECRET=<YOUR_AWS_SECRET>
 
