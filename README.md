@@ -26,12 +26,12 @@ As their data engineer, you are tasked with building an ETL pipeline that extrac
 ## Remarks:
 Make sure to fill *dwh.cfg* with the corresponding parameters:
 
- Markup : *[CLUSTER]
-  *HOST=<YOUR_AWS_REDSHIFT_ENDPOINT>
-  *DB_NAME=<YOUR_AWS_REDSHIFT_CLUSTER_DATABASE>
-  *DB_USER=<YOUR_AWS_DATABASE_USER>
-  *DB_PASSWORD=<YOUR_AWS_DATABASE_PASSWORD>
-  *DB_PORT=<YOUR_AWS_REDSHIFT_PORT>
+ Markup : * [CLUSTER]
+  * HOST=<YOUR_AWS_REDSHIFT_ENDPOINT>
+  * DB_NAME=<YOUR_AWS_REDSHIFT_CLUSTER_DATABASE>
+  * DB_USER=<YOUR_AWS_DATABASE_USER>
+  * DB_PASSWORD=<YOUR_AWS_DATABASE_PASSWORD>
+  * DB_PORT=<YOUR_AWS_REDSHIFT_PORT>
 
  Markup : *[IAM_ROLE]
   *ARN=<IAM_ROLE_ARN> 
