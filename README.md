@@ -1,5 +1,3 @@
-# Still in Progress
-
 # Project: Data Warehouse (Udacity Project)
 
 ### Introduction
